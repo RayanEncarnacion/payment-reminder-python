@@ -11,7 +11,7 @@ class Audit(models.Model):
         abstract = True
 
 class StateAudit(Audit):
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     class Meta:
         abstract = True
