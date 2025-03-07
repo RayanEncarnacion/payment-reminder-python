@@ -21,7 +21,10 @@
 
         {% csrf_token %}
 
-        <h3 class="d-inline-block">Create client</h3>
+        <div class="d-flex justify-content-between align-items-center">
+            <h3>Create client</h3>
+            <a href="/client/" class="btn btn-primary">Back to list</a>
+        </div>
 
         <div class="col-12">
             <label for="name" class="form-label">Name</label>
@@ -46,7 +49,7 @@
             </div>
         </div>
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">Create</button>
+            <button class="btn btn-success" type="submit">Create</button>
         </div>
     </form>
 

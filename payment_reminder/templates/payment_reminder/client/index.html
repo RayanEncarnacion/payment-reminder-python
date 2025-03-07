@@ -15,7 +15,11 @@
 <body data-bs-theme="dark"
     class="h-100 d-flex align-items-center justify-content-center flex-column py-4">
 
-    <h1>Client's list</h1>
+
+    <div class="d-flex justify-content-center gap-1 align-items-center gap-4">
+        <h1 class="mb-0">Client's list</h1>
+        <a href="/client/create/" class="btn btn-primary">Create client</a>
+    </div>
 
     {% if client_list %}
     <ul class="mt-3">
