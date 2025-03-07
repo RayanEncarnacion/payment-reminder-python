@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .forms.client import CreateClient
+from .forms import CreateClient
 from .models import Client, User
 from django.urls import reverse
 from django.views import generic
@@ -22,9 +22,6 @@ class DetailView(generic.DetailView):
     
 def index(request):
     return HttpResponse("Hello, world! You're at the payment reminder index.")
-
-def login(request):
-    return render(request, BASE_TEMPLATES_PATH + "login.html")
 
 def create_client(request):
     if request.method == "POST":
