@@ -27,21 +27,17 @@ def login(request):
     return render(request, BASE_TEMPLATES_PATH + "login.html")
 
 def create_client(request):
-    return render(request, CLIENT_TEMPLATES_PATH + "create.html")
-
-def store_client(request):
-    form = CreateClient(request.POST)
-    
-    if form.is_valid():
-        client = Client(name=request.POST["name"], email=request.POST["email"], createdBy=User.objects.first())
-        client.save()
+    if request.method == "POST":
+        form = CreateClient(request.POST)
+        if form.is_valid():
+            client = Client(name=request.POST["name"], email=request.POST["email"], createdBy=User.objects.first())
+            client.save()
         
         return HttpResponseRedirect(reverse("payment_reminder:clients"))
+
     else:
-        return render(
-            request,
-            CLIENT_TEMPLATES_PATH + "create.html",
-            {
-                "errors": form.errors,
-            },
-        )
+        form = CreateClient()
+        
+    return render(request, CLIENT_TEMPLATES_PATH + "create.html", { "form": form })
+
+

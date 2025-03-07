@@ -15,7 +15,7 @@
 <body data-bs-theme="dark"
     class="h-100 d-flex align-items-center justify-content-center py-4">
 
-    <form action="{% url 'payment_reminder:store_client' %}" method="post"
+    <form action="{% url 'payment_reminder:create_client' %}" method="post"
         class="row flex-column g-3 needs-validation m-auto w-100 {% if errors %}was-validated{% endif %}"
         style="max-width: 500px" novalidate>
 
@@ -52,6 +52,7 @@
             <button class="btn btn-success" type="submit">Create</button>
         </div>
     </form>
+
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
