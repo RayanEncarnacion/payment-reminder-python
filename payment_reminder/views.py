@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .forms import CreateClient
+from .forms import CreateClient, CreateProject
 from .models import Client, User
 from django.urls import reverse
 from django.views import generic
@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 BASE_TEMPLATES_PATH = "payment_reminder/"
 CLIENT_TEMPLATES_PATH = BASE_TEMPLATES_PATH + "client/"
+PROJECT_TEMPLATES_PATH = BASE_TEMPLATES_PATH + "project/"
 
 class ClientsView(generic.ListView):
     template_name = CLIENT_TEMPLATES_PATH + "index.html"
@@ -38,5 +39,20 @@ def create_client(request):
         form = CreateClient()
         
     return render(request, CLIENT_TEMPLATES_PATH + "create.html", { "form": form })
+
+@login_required
+def create_project(request):
+    if request.method == "POST":
+        form = CreateClient(request.POST)
+        if form.is_valid():
+            client = Client(name=request.POST["name"], email=request.POST["email"], createdBy=User.objects.first())
+            client.save()
+        
+        return HttpResponseRedirect(reverse("payment_reminder:clients"))
+
+    else:
+        form = CreateProject()
+        
+    return render(request, PROJECT_TEMPLATES_PATH + "create.html", { "form": form })
 
 
