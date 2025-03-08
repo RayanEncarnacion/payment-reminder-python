@@ -46,6 +46,8 @@
     <main class="form-signin w-100 m-auto">
         <form action="{% url 'payment_reminder:login' %}" method="post"
             novalidate>
+            <input type="hidden" name="next"
+                value="{{ next|default:'/client/' }}">
             {% csrf_token %}
 
             <img class="mb-4"
