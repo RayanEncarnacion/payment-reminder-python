@@ -4,6 +4,7 @@ from .forms import CreateClient
 from .models import Client, User
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 BASE_TEMPLATES_PATH = "payment_reminder/"
 CLIENT_TEMPLATES_PATH = BASE_TEMPLATES_PATH + "client/"
@@ -23,6 +24,7 @@ class DetailView(generic.DetailView):
 def index(request):
     return HttpResponse("Hello, world! You're at the payment reminder index.")
 
+@login_required
 def create_client(request):
     if request.method == "POST":
         form = CreateClient(request.POST)
