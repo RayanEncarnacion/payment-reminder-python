@@ -8,15 +8,18 @@
 </div>
 
 {% if client_list %}
-<ul class="mt-3">
-    {% for client in client_list %}
-    <li><a href="/client/{{ client.id }}/">Name: {{ client.name }},
-            Email:
-            {{ client.email }}</a></li>
-    {% endfor %}
-</ul>
+    <ul class="mt-3">
+        {% for client in client_list %}
+            <li>
+                <a href="/client/{{ client.id }}/">
+                    Name: {{ client.name }},
+                    Email: {{ client.email }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% else %}
-<p>No clients registered.</p>
+    <p>No clients registered.</p>
 {% endif %}
 
 {% endblock %}

@@ -3,12 +3,12 @@
 {% block content %}
 
 <form action="{% url 'payment_reminder:create_project' %}" method="post"
-    class="row flex-column g-3 needs-validation m-auto w-100"
-    style="max-width: 500px">
+    class="row flex-column g-3 needs-validation m-auto w-100 {% if form.errors %} was-validated {% endif %}"
+    style="max-width: 500px" novalidate>
 
     <div class="d-flex justify-content-between align-items-center">
         <h3>Create project</h3>
-        <!-- <a href="/client/" class="btn btn-primary">Back to list</a> -->
+        <a href="/project/" class="btn btn-primary">Back to list</a>
     </div>
 
     {% csrf_token %}

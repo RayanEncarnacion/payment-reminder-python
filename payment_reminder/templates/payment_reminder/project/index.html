@@ -1,0 +1,27 @@
+{% include "../base.html" with title="Project : List" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center gap-1 align-items-center gap-4">
+    <h1 class="mb-0">Project's list</h1>
+    <a href="/project/create/" class="btn btn-primary">Create project</a>
+</div>
+
+{% if project_list %}
+    <ul class="mt-3">
+        {% for project in project_list %}
+            <li>
+                <a href="/project/{{ project.id }}/">
+                    ID: {{ project.id }},
+                    Name: {{ project.name }},
+                    Client: {{ project.client.name }}
+                    Amount: {{ project.amount|floatformat:2 }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No projects registered.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% include "../base.html" with title="Project : Details" %}
+
+{% block content %}
+<h1>Project #{{ project.id }}</h1>
+
+{{ context }}
+<ul class="mt-3">
+    <li>ID: {{ project.id }}</li>
+    <li>Name: {{ project.name }}</li>
+    <li>Client: {{ project.client.name }}</li>
+    <li>Amount: {{ project.amount|floatformat:2 }}</li>
+</ul>
+
+<a href="/project" class="btn btn-primary">Back to list</a>
+{% endblock %}
