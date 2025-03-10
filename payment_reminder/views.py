@@ -1,10 +1,11 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import CreateClient, CreateProject
-from .models import Client, Project
 from django.urls import reverse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+
+from .forms import CreateClient, CreateProject
+from .models import Client, Project
 
 BASE_TEMPLATES_PATH = "payment_reminder/"
 CLIENT_TEMPLATES_PATH = BASE_TEMPLATES_PATH + "client/"
@@ -12,8 +13,6 @@ PROJECT_TEMPLATES_PATH = BASE_TEMPLATES_PATH + "project/"
 
 class ClientsView(generic.ListView):
     template_name = CLIENT_TEMPLATES_PATH + "index.html"
-    # To rename the passed variables names -> context_object_name = "clients"
-    # By default its "<MODEL>_list" (client_list)
 
     def get_queryset(self):
         return Client.objects.filter(deleted__exact=False)
@@ -30,7 +29,7 @@ class ProjectsView(generic.ListView):
                )
     
 def index(request):
-    return HttpResponse("Hello, world! You're at the payment reminder index.")
+   return render(request, BASE_TEMPLATES_PATH + "index.html")
 
 @login_required
 def create_client(request):

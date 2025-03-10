@@ -1,0 +1,25 @@
+{% include "./base.html" with title="Payment Reminder" %}
+
+{% block content %}
+
+    <div class="w-100 mt-4">
+        <div class="row gap-3 px-4 mx-auto justify-content-center" style="max-width: 1000px">
+            <h1 class="h1 col-12">Dashboard</h1>
+            <a 
+                href="{% url 'payment_reminder:clients' %}" 
+                class="text-decoration-none py-4 col-12 col-md-6 col-lg-4 card text-center d-flex flex-column" style="max-width: 20rem"
+                title="Go to clients list">
+                <h3 class="h3">Clients</h3>
+                <i class="h4 bi bi-people"></i>
+            </a>
+            <a 
+                href="{% url 'payment_reminder:projects' %}" 
+                class="text-decoration-none py-4 col-12 col-md-6 col-lg-4 card text-center d-flex flex-column" style="max-width: 20rem"
+                title="Go to projects list">
+                <h3 class="h3">Projects</h3>
+                <i class="h4 bi bi-people"></i>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
