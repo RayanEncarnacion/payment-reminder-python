@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class Audit(models.Model):
     deleted = models.BooleanField(default=False)
-    createdAt = models.DateTimeField(auto_now_add=True, db_column='created_at')
-    createdBy = models.ForeignKey(User, db_column='created_by', on_delete=models.CASCADE) 
+    createdAt = models.DateTimeField(auto_now_add=True, db_column="created_at")
+    createdBy = models.ForeignKey(User, null=True, db_column="created_by", on_delete=models.SET_NULL) 
 
     class Meta:
         abstract = True
@@ -28,31 +28,30 @@ class Client(StateAudit):
 class Project(StateAudit):
     name = models.CharField(max_length=100, unique=True)
     amount = models.FloatField()
-    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name
 
-    class Meta:
-        db_table = "project"
-    
     def get_dates(self):
         return ProjectDate.get_all_project_dates(self.pk)
+    class Meta:
+        db_table = "project"
 
 class ProjectDate(Audit):
-    project = models.ForeignKey(Project, on_delete=models.DO_NOTHING, related_name="dates")
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="dates")
     day = models.SmallIntegerField()
     
     def __str__(self):
         return f"{self.project.name}, day {self.day}"
 
-    class Meta:
-        db_table = "projectDate"
-    
     @classmethod
     def get_all_project_dates(self, id):
         return self.objects.filter(project_id=id)
     
+    class Meta:
+        db_table = "projectDate"
+   
 class Payment(Audit):
     project = models.ForeignKey(Project, on_delete=models.DO_NOTHING)
     due_date = models.DateTimeField()
