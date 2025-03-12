@@ -1,0 +1,29 @@
+{% include "../base.html" with title="Client's Projects" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center gap-1 align-items-center gap-4 mb-3">
+    <h1 class="mb-0">Client #{{ pk }} projects</h1>
+
+</div>
+
+{% if projects %}
+<ul>
+    {% for project in projects %}
+    <li>
+        <a title="See project" href="/project/{{ project.id }}/">
+            ID: {{ project.id }},
+            Name: {{ project.name }},
+            Amount: {{ project.amount|floatformat:2 }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No projects related to client.</p>
+{% endif %}
+
+<a href="{% url 'payment_reminder:client_details' pk %}"
+    class="btn btn-primary">Back to client</a>
+
+{% endblock %}

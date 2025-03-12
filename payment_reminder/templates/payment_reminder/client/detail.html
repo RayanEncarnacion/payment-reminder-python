@@ -38,5 +38,9 @@
     <li>Email: {{ client.email }}</li>
 </ul>
 
-<a href="/client" class="btn btn-primary">Back to list</a>
+<div class="d-flex justify-content-center align-items-center gap-2">
+    <a href="/client" class="btn btn-primary">Back to list</a>
+    <a href="{% url 'payment_reminder:client_projects' client.id %}"
+        class="btn btn-success">List of projects</a>
+</div>
 {% endblock %}
