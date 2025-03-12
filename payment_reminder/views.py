@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
@@ -31,8 +31,14 @@ class ProjectsView(generic.ListView):
 def index(request):
    return render(request, BASE_TEMPLATES_PATH + "index.html")
 
+def delete(request, model, id):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    
+    model.objects.get(id=id).delete()
+
 @login_required
-def create_client(request):
+def CreateClient(request):
     if request.method == "POST":
         form = CreateClient(request.POST)
         
@@ -47,10 +53,16 @@ def create_client(request):
         return render(request, CLIENT_TEMPLATES_PATH + "create.html", { "form": CreateClient() })
 
 @login_required
-def create_project(request):
+def DeleteClient(request, pk):
+    delete(request, Client, pk)
+    return HttpResponseRedirect(reverse("payment_reminder:clients"))
+
+@login_required
+def CreateProject(request):
     
     if request.method == "POST":
         form = CreateProject(request.POST)
+        
         if not form.is_valid():
             return render(request, PROJECT_TEMPLATES_PATH + "create.html", { "form": form })
         
@@ -64,5 +76,17 @@ def create_project(request):
         return HttpResponseRedirect(reverse("payment_reminder:projects"))
     else:
         return render(request, PROJECT_TEMPLATES_PATH + "create.html", { "form": CreateProject() })
+    
+@login_required
+def DeleteProject(request, pk):
+    
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    
+    print(request)
+    print(pk)
+    # Project.objects.get(pk).delete() 
+    
+    return HttpResponseRedirect(reverse("payment_reminder:projects"))
 
 

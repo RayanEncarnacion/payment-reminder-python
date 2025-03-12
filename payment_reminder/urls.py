@@ -16,15 +16,21 @@ urlpatterns = [
     
     # Client views
     path("client/", views.ClientsView.as_view(), name="clients"),
-    path("client/create/", views.create_client, name="create_client"),
+    path("client/create/", views.CreateClient, name="client_create"),
     path("client/<int:pk>/", 
          generic.DetailView.as_view(template_name="payment_reminder/client/detail.html", model=Client), 
          name="client_detail"),
+      path("client/<int:pk>/delete/", 
+         views.DeleteClient, 
+         name="client_delete"),
     
     # Project views
     path("project/", views.ProjectsView.as_view(), name="projects"),
-    path("project/create/", views.create_project, name="create_project"),
+    path("project/create/", views.CreateProject, name="project_create"),
     path("project/<int:pk>/", 
          generic.DetailView.as_view(template_name="payment_reminder/project/detail.html", model=Project), 
          name="project_detail"),
+    path("project/<int:pk>/delete/", 
+         views.DeleteProject, 
+         name="project_delete"),
 ]
