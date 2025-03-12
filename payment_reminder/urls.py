@@ -16,7 +16,7 @@ urlpatterns = [
     
     # Client views
     path("client/", views.ClientsView.as_view(), name="clients"),
-    path("client/create/", views.CreateClient, name="client_create"),
+    path("client/create/", views.CreateClientView, name="client_create"),
     path("client/<int:pk>/", 
          generic.DetailView.as_view(template_name="payment_reminder/client/detail.html", model=Client), 
          name="client_detail"),
@@ -26,7 +26,7 @@ urlpatterns = [
     
     # Project views
     path("project/", views.ProjectsView.as_view(), name="projects"),
-    path("project/create/", views.CreateProject, name="project_create"),
+    path("project/create/", views.CreateProjectView, name="project_create"),
     path("project/<int:pk>/", 
          generic.DetailView.as_view(template_name="payment_reminder/project/detail.html", model=Project), 
          name="project_detail"),

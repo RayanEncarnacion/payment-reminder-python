@@ -38,7 +38,7 @@ def delete(request, model, id):
     model.objects.get(id=id).delete()
 
 @login_required
-def CreateClient(request):
+def CreateClientView(request):
     if request.method == "POST":
         form = CreateClient(request.POST)
         
@@ -58,7 +58,7 @@ def DeleteClient(request, pk):
     return HttpResponseRedirect(reverse("payment_reminder:clients"))
 
 @login_required
-def CreateProject(request):
+def CreateProjectView(request):
     
     if request.method == "POST":
         form = CreateProject(request.POST)
@@ -79,14 +79,7 @@ def CreateProject(request):
     
 @login_required
 def DeleteProject(request, pk):
-    
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"])
-    
-    print(request)
-    print(pk)
-    # Project.objects.get(pk).delete() 
-    
+    delete(request, Project, pk)
     return HttpResponseRedirect(reverse("payment_reminder:projects"))
 
 

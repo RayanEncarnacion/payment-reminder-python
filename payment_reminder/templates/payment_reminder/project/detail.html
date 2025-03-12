@@ -1,7 +1,38 @@
 {% include "../base.html" with title="Project : Details" %}
 
 {% block content %}
-<h1>Project #{{ project.id }}</h1>
+<div class="d-flex justify-content-center gap-1 align-items-center gap-4">
+    <h1>Project #{{ project.id }}</h1>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+        data-bs-target="#delete-project-modal">
+        Delete
+    </button>
+</div>
+
+<form id="delete-project"
+    action="{% url 'payment_reminder:project_delete' project.id %}"
+    method="post">
+    {% csrf_token %}
+    <input type="hidden" name="pk" value="{{ project.id }}">
+</form>
+
+<div class="modal fade" id="delete-project-modal" data-bs-backdrop="static"
+    data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="delete-project-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body fw-bold">
+                Do you want to delete this project?
+            </div>
+            <div class="d-flex justify-content-end p-2 gap-2">
+                <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close</button>
+                <button form="delete-project" type="submit"
+                    class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {{ context }}
 <ul class="mt-3">
