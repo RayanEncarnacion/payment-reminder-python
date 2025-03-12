@@ -1,7 +1,8 @@
 {% include "../base.html" with title="Client : Create" %}
 
 {% block content %}
-<form action="{% url 'payment_reminder:create_client' %}" method="post"
+
+<form action="{% url 'payment_reminder:client_create' %}" method="post"
     class="row flex-column g-3 needs-validation m-auto w-100 {% if errors %}was-validated{% endif %}"
     style="max-width: 500px" novalidate>
 

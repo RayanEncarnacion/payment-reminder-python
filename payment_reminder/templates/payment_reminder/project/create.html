@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="{% url 'payment_reminder:create_project' %}" method="post"
+<form action="{% url 'payment_reminder:project_create' %}" method="post"
     class="row flex-column g-3 needs-validation m-auto w-100 {% if form.errors %} was-validated {% endif %}"
     style="max-width: 500px" novalidate>
 
@@ -14,12 +14,12 @@
     {% csrf_token %}
 
     {% for field in form %}
-        {{ field }}
-        {% if field.errors %}
-            <small class="d-inline-block m-0 text-danger text-sm">
-                {{ field.errors.0 }}
-            </small>
-        {% endif %}
+    {{ field }}
+    {% if field.errors %}
+    <small class="d-inline-block m-0 text-danger text-sm">
+        {{ field.errors.0 }}
+    </small>
+    {% endif %}
     {% endfor %}
 
     <div class="col-12 px-0">
