@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SESSION_COOKIE_AGE = 15 * 60 # 15mins sessions
+
 SESSION_SAVE_EVERY_REQUEST = True
 
 LOGIN_URL = "/login/"
