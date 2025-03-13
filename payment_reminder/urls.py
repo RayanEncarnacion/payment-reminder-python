@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.views import generic
 
 from . import views
-from .models import Client, Project
+from .models import Project
 
 app_name = "payment_reminder"
 
@@ -16,22 +16,20 @@ urlpatterns = [
     
     # Client views
     path("client/", views.ClientsView.as_view(), name="clients"),
-    path("client/create/", views.CreateClientView, name="client_create"),
+    path("client/create/", views.createClientView, name="client_create"),
     path("client/<int:pk>/", views.ClientDetails.as_view(), name="client_details"),
     path("client/<int:pk>/projects", 
-         views.ClientProjectsView, 
+         views.clientProjectsView, 
          name="client_projects"),
       path("client/<int:pk>/delete/", 
-         views.DeleteClient, 
+         views.deleteClient, 
          name="client_delete"),
     
     # Project views
     path("project/", views.ProjectsView.as_view(), name="projects"),
-    path("project/create/", views.CreateProjectView, name="project_create"),
-    path("project/<int:pk>/", 
-         generic.DetailView.as_view(template_name="payment_reminder/project/detail.html", model=Project), 
-         name="project_details"),
+    path("project/create/", views.createProjectView, name="project_create"),
+    path("project/<int:pk>/", views.ProjectDetails.as_view(), name="project_details"),
     path("project/<int:pk>/delete/", 
-         views.DeleteProject, 
+         views.deleteProject, 
          name="project_delete"),
 ]
