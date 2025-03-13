@@ -10,7 +10,8 @@
 
     <div class="d-flex justify-content-between align-items-center">
         <h3>Create client</h3>
-        <a href="/client/" class="btn btn-primary">Back to list</a>
+        <a href="{% url 'payment_reminder:clients' %}"
+            class="btn btn-primary">Back to list</a>
     </div>
 
     <div class="col-12">
@@ -20,8 +21,9 @@
             id="name" name="name" placeholder="Google"
             value="{{ request.POST.name|default_if_none:'' }}" required>
         <div class="invalid-feedback">
-            {% if errors.name %} {{ errors.name.0 }} {% else %} The field
-            is required {% endif %}
+            {% if errors.name %} {{ errors.name.0 }}
+            {% else %} The field is required
+            {% endif %}
         </div>
     </div>
     <div class="col-12">
@@ -31,8 +33,9 @@
             id="email" name="email" placeholder="test@test.com"
             value="{{ request.POST.email|default_if_none:'' }}" required>
         <div class="invalid-feedback">
-            {% if errors.email %} {{ errors.email.0 }} {% else %} The field
-            is required {% endif %}
+            {% if errors.email %} {{ errors.email.0 }}
+            {% else %} The field is required
+            {% endif %}
         </div>
     </div>
     <div class="col-12">
